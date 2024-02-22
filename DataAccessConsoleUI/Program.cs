@@ -15,7 +15,7 @@ namespace DataAccessConsoleUI
 		private static IConfiguration _configuration;
 		private static IDataLogic _data;
 
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			InitializeConfiguration();
 			InitializeDatabaseConnection();

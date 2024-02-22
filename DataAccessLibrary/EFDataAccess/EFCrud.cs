@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Text;
 
 using DataAccessLibrary.Models;
 
@@ -26,8 +23,8 @@ namespace DataAccessLibrary.EFDataAccess
 		{
 			using ( EFContext db = new EFContext() )
 			{
-				db.People.Add(person);
-				db.SaveChanges();
+				_ = db.People.Add(person);
+				_ = db.SaveChanges();
 			}
 		}
 
@@ -35,16 +32,16 @@ namespace DataAccessLibrary.EFDataAccess
 		{
 			using ( EFContext db = new EFContext() )
 			{
-				db.Employers.Add(employer);
-				db.SaveChanges();
+				_ = db.Employers.Add(employer);
+				_ = db.SaveChanges();
 			}
 		}
 		public void CreateAddress(Address address)
 		{
 			using ( EFContext db = new EFContext() )
 			{
-				db.Addresses.Add(address);
-				db.SaveChanges();
+				_ = db.Addresses.Add(address);
+				_ = db.SaveChanges();
 			}
 		}
 
@@ -130,7 +127,7 @@ namespace DataAccessLibrary.EFDataAccess
 
 				record.Employer = person.Employer;
 
-				db.SaveChanges();
+				_ = db.SaveChanges();
 			}
 		}
 
@@ -149,7 +146,7 @@ namespace DataAccessLibrary.EFDataAccess
 					record.Addresses.Add(item);
 				}
 
-				db.SaveChanges();
+				_ = db.SaveChanges();
 			}
 		}
 
@@ -164,7 +161,7 @@ namespace DataAccessLibrary.EFDataAccess
 				record.State = address.State;
 				record.ZipCode = address.ZipCode;
 
-				db.SaveChanges();
+				_ = db.SaveChanges();
 			}
 		}
 
@@ -174,9 +171,9 @@ namespace DataAccessLibrary.EFDataAccess
 			{
 				Person record = db.People.Include(e => e.Employer).Include(a => a.Addresses).Where(p => p.Id == person.Id).First();
 
-				db.People.Remove(record);
+				_ = db.People.Remove(record);
 
-				db.SaveChanges();
+				_ = db.SaveChanges();
 			}
 		}
 
@@ -186,9 +183,9 @@ namespace DataAccessLibrary.EFDataAccess
 			{
 				Employer record = db.Employers.Include(a => a.Addresses).Where(e => e.Id == employer.Id).First();
 
-				db.Employers.Remove(record);
+				_ = db.Employers.Remove(record);
 
-				db.SaveChanges();
+				_ = db.SaveChanges();
 			}
 		}
 
@@ -198,9 +195,9 @@ namespace DataAccessLibrary.EFDataAccess
 			{
 				Address record = db.Addresses.Where(a => a.Id == address.Id).First();
 
-				db.Addresses.Remove(record);
+				_ = db.Addresses.Remove(record);
 
-				db.SaveChanges();
+				_ = db.SaveChanges();
 			}
 		}
 	}
